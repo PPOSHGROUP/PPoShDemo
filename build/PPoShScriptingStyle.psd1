@@ -52,7 +52,6 @@
     Rules = @{
         PSPlaceCloseBrace = @{
             Enable = $true
-            NoEmptyLineBefore = $true
             IgnoreOneLineBlock = $true
             NewLineAfter = $true
         }

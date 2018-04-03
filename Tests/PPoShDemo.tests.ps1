@@ -9,25 +9,25 @@ Describe 'Module Information' -Tags 'Command'{
         It 'Valid Module Manifest' {
             {
                 $Script:Manifest = Test-ModuleManifest -Path $ModuleManifest -ErrorAction Stop -WarningAction SilentlyContinue
-            } | Should -Not Throw
+            } | Should Not Throw
         }
         It 'Valid Manifest Name' {
-            $Script:Manifest.Name | Should -Be $ModuleName
+            $Script:Manifest.Name | Should be $ModuleName
         }
         It 'Generic Version Check' {
-            $Script:Manifest.Version -as [Version] | Should -Not -BeNullOrEmpty
+            $Script:Manifest.Version -as [Version] | Should Not BeNullOrEmpty
         }
         It 'Valid Manifest Description' {
-            $Script:Manifest.Description | Should -Not -BeNullOrEmpty
+            $Script:Manifest.Description | Should Not BeNullOrEmpty
         }
         It 'Valid Manifest Root Module' {
-            $Script:Manifest.RootModule | Should -Be "$ModuleName.psm1"
+            $Script:Manifest.RootModule | Should Be "$ModuleName.psm1"
         }
         It 'Valid Manifest GUID' {
-            $Script:Manifest.Guid | Should -Be '18eb0044-088c-4220-ad6b-124e2a8f5bc4'
+            $Script:Manifest.Guid | SHould be '18eb0044-088c-4220-ad6b-124e2a8f5bc4'
         }
         It 'Required Modules' {
-            $Script:Manifest.RequiredModules | Should -BeIn @('PPoshTools')
+            $Script:Manifest.RequiredModules | Should BeNullOrEmpty
         }
     }
 
@@ -36,7 +36,7 @@ Describe 'Module Information' -Tags 'Command'{
             $ExportedCount = Get-Command -Module $ModuleName | Measure-Object | Select-Object -ExpandProperty Count
             $FileCount = Get-ChildItem -Path "$PSScriptRoot\..\$ModuleName\Public" -Filter *.ps1 -Recurse | Measure-Object | Select-Object -ExpandProperty Count
 
-            $ExportedCount | Should-Be $FileCount
+            $ExportedCount | Should be $FileCount
         }
     }
 }
